@@ -145,6 +145,8 @@ uint8_t powerMenuIndex;
 // placeholders for Ki and Kd edits
 float raw_Ki, raw_Kd;
 bool menu_changed = false;
+
+
 /* Main status screen. It's up to the implementation specific part to show what is needed. As this is very display dependend */
 static void lcd_status_screen()
 {
@@ -250,6 +252,9 @@ static void lcd_service_menu()
 	MENU_ITEM_EDIT(int10, MSG_TST_VEN_RISC, &vel_vent_riscaldamentoOutput, 0, 230, PSTR(HELP_TST_VEN_RISC), PSTR(RANGE_0_230_V));
 	MENU_ITEM_EDIT(bool, MSG_TST_CANDELETTA, &_candeletta, PSTR(MSG_TST_CANDELETTA), nullptr);
 	MENU_ITEM_EDIT(bool, MSG_TST_COCLEA, &_coclea, PSTR(MSG_TST_COCLEA), nullptr);
+	MENU_ITEM(function, MSG_STORE_EPROM, Config_StoreSettings);
+	MENU_ITEM(function, MSG_LOAD_EPROM, Config_RetrieveSettings);
+	MENU_ITEM(function, MSG_RESTORE_FAILSAFE, Config_ResetDefault);
     END_MENU();
 }
 //		Menu dei parametri

@@ -33,7 +33,7 @@ int LeggeTempFumi(){
 }
 
 int LeggeTempAmbiente(){
-	int temp = thermistor.read();   // Read temperature
+	int temp = int(thermistor.read() / 10);   // Read temperature
 
     return temp;
 }

@@ -161,12 +161,15 @@ static void lcd_implementation_status_screen()
 	uint8_t minuti = now.minute();
 	char buf[20];
 	static unsigned char fan_rot = 0;
-
+	if (ore > 24)
+		ore = 24;
+	if (minuti > 59)
+		minuti = 59;
 	u8g.setColorIndex(1);	// black on white
 
 	//Orologio
     u8g.setFont(u8g_font_10x20);
-    u8g.setPrintPos(39, 30);
+    u8g.setPrintPos(39, 40);
 	if ((blink % 2)) {
 		sprintf(buf, "%02d %02d ", ore, minuti);
 		u8g.print(buf);

@@ -44,9 +44,45 @@ void Config_StoreSettings()
   int i=EEPROM_OFFSET;
   EEPROM_WRITE_VAR(i,ver); // invalidate data first 
   
+  EEPROM_WRITE_VAR(i, _NTC_NOM_RESISTANCE);
+  EEPROM_WRITE_VAR(i, _NTC_BETA);
+  EEPROM_WRITE_VAR(i, _NTC_SERIES_RES);
+  EEPROM_WRITE_VAR(i, SetpointAmbiente);
+
   EEPROM_WRITE_VAR(i,tempo_coclea);
   EEPROM_WRITE_VAR(i,vel_vent_fumi);
+  EEPROM_WRITE_VAR(i, vel_vent_riscaldamento);
+  EEPROM_WRITE_VAR(i, termostatiSpegnimento);
 
+  EEPROM_WRITE_VAR(i, _Th01);
+  EEPROM_WRITE_VAR(i, _Th02);
+  EEPROM_WRITE_VAR(i, _Th03);
+  EEPROM_WRITE_VAR(i, _Th05);
+  EEPROM_WRITE_VAR(i, _Th06);
+  EEPROM_WRITE_VAR(i, _Th07);
+  EEPROM_WRITE_VAR(i, _Th08);
+  EEPROM_WRITE_VAR(i, _Th09);
+
+  EEPROM_WRITE_VAR(i, _Th43);
+
+  EEPROM_WRITE_VAR(i, _T01);
+  EEPROM_WRITE_VAR(i, _T02);
+  EEPROM_WRITE_VAR(i, _T03);
+  EEPROM_WRITE_VAR(i, _T04);
+  EEPROM_WRITE_VAR(i, _T05);
+  EEPROM_WRITE_VAR(i, _T06);
+  EEPROM_WRITE_VAR(i, _T07);
+  EEPROM_WRITE_VAR(i, _T08);
+  EEPROM_WRITE_VAR(i, _T13);
+  EEPROM_WRITE_VAR(i, _T14);
+  EEPROM_WRITE_VAR(i, _T16);
+
+  EEPROM_WRITE_VAR(i, _P05);
+  EEPROM_WRITE_VAR(i, _P23);
+  EEPROM_WRITE_VAR(i, _P27);
+  EEPROM_WRITE_VAR(i, _P99);
+
+  EEPROM_WRITE_VAR(i, _D01);
   
   char ver2[4]=EEPROM_VERSION;
   i=EEPROM_OFFSET;
@@ -57,7 +93,7 @@ void Config_StoreSettings()
 #endif //EEPROM_SETTINGS
 
 
-#ifndef DISABLE_M503
+
 void Config_PrintSettings()
 {  // Always have this function, even with EEPROM_SETTINGS disabled, the current values will be shown
  /*   SERIAL_ECHO_START;
@@ -130,7 +166,7 @@ void Config_PrintSettings()
     SERIAL_ECHOLN(""); 
 #endif*/
 } 
-#endif
+
 
 
 #ifdef EEPROM_SETTINGS
@@ -140,23 +176,61 @@ void Config_RetrieveSettings()
     char stored_ver[4];
     char ver[4]=EEPROM_VERSION;
     EEPROM_READ_VAR(i,stored_ver); //read stored version
-    //  SERIAL_ECHOLN("Version: [" << ver << "] Stored version: [" << stored_ver << "]");
+    Serial.println(stored_ver);
     if (strncmp(ver,stored_ver,3) == 0)
     {
         // version number match
-        EEPROM_READ_VAR(i,tempo_coclea);
-		EEPROM_READ_VAR(i,vel_vent_fumi);
+		EEPROM_READ_VAR(i, _NTC_NOM_RESISTANCE);
+		EEPROM_READ_VAR(i, _NTC_BETA);
+		EEPROM_READ_VAR(i, _NTC_SERIES_RES);
+		EEPROM_READ_VAR(i, SetpointAmbiente);
+
+		EEPROM_READ_VAR(i, tempo_coclea);
+		EEPROM_READ_VAR(i, vel_vent_fumi);
+		EEPROM_READ_VAR(i, vel_vent_riscaldamento);
+		EEPROM_READ_VAR(i, termostatiSpegnimento);
+
+		EEPROM_READ_VAR(i, _Th01);
+		EEPROM_READ_VAR(i, _Th02);
+		EEPROM_READ_VAR(i, _Th03);
+		EEPROM_READ_VAR(i, _Th05);
+		EEPROM_READ_VAR(i, _Th06);
+		EEPROM_READ_VAR(i, _Th07);
+		EEPROM_READ_VAR(i, _Th08);
+		EEPROM_READ_VAR(i, _Th09);
+
+		EEPROM_READ_VAR(i, _Th43);
+
+		EEPROM_READ_VAR(i, _T01);
+		EEPROM_READ_VAR(i, _T02);
+		EEPROM_READ_VAR(i, _T03);
+		EEPROM_READ_VAR(i, _T04);
+		EEPROM_READ_VAR(i, _T05);
+		EEPROM_READ_VAR(i, _T06);
+		EEPROM_READ_VAR(i, _T07);
+		EEPROM_READ_VAR(i, _T08);
+		EEPROM_READ_VAR(i, _T13);
+		EEPROM_READ_VAR(i, _T14);
+		EEPROM_READ_VAR(i, _T16);
+
+		EEPROM_READ_VAR(i, _P05);
+		EEPROM_READ_VAR(i, _P23);
+		EEPROM_READ_VAR(i, _P27);
+		EEPROM_READ_VAR(i, _P99);
+
+		EEPROM_READ_VAR(i, _D01);
 		// Call updatePID (similar to when we have processed M301)
 		//updatePID();
         //SERIAL_ECHO_START;
-        //SERIAL_ECHOLNPGM("Stored settings retrieved");
+        Serial.println("Stored settings retrieved");
     }
     else
     {
         Config_ResetDefault();
+		Serial.println("Default settings retrieved");
     }
     #ifdef EEPROM_CHITCHAT
-      Config_PrintSettings();
+//      Config_PrintSettings();
     #endif
 }
 #endif
