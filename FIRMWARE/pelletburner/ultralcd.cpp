@@ -1,21 +1,14 @@
 
 #include "ultralcd.h"
 #include "definition.h"
-//#include "pelletburner.h"
-#ifdef ULTRA_LCD
 #include "language.h"
-
 #include "ConfigurationStore.h"
-
-//int8_t encoderDiff; /* encoderDiff is updated from interrupt context and added to encoderPosition every LCD update */
+#include "dogm_lcd_implementation.h"
 
 /* Configuration settings */
 
-#ifdef ULTIPANEL
 static float manual_feedrate[] = { 100, 2, 5 };
-#endif // ULTIPANEL
 
-/* !Configuration settings */
 
 //Function pointer to menu functions.
 typedef void (*menuFunc_t)();
@@ -23,34 +16,24 @@ typedef void (*menuFunc_t)();
 uint8_t lcd_status_message_level;
 char lcd_status_message[LCD_WIDTH+1] = WELCOME_MSG;
 
-#ifdef DOGLCD
-#include "dogm_lcd_implementation.h"
-#else
-#include "ultralcd_implementation_hitachi_HD44780.h"
-#endif
-
-/** forward declerations **/
-
-
 
 /* Different menus */
 static void lcd_status_screen();
-extern bool powersupply;
+//extern bool powersupply;
 static void lcd_main_menu();
-static void lcd_tune_menu();
+//static void lcd_tune_menu();
 static void lcd_test_ventola_fumi();
 static void lcd_test_ventola_risc();
 static void lcd_test_coclea();
 static void lcd_service_menu();
 static void lcd_parameter_menu();
 static void lcd_timers_menu();
-static void lcd_control_menu();
-static void lcd_laser_menu();
+//static void lcd_control_menu();
 static void lcd_termostat_menu();
 static void lcd_powers_menu();
 static void lcd_power_edit_menu();
 
-static void lcd_control_motion_menu();
+//static void lcd_control_motion_menu();
 
 static void lcd_set_contrast();
 
@@ -243,41 +226,6 @@ static void lcd_return_to_main() {
 	currentMenu = lcd_main_menu;
 }
 
-
-
-static void lcd_tune_menu()
-{
-    START_MENU();
-   // MENU_ITEM(back, MSG_MAIN, "", lcd_main_menu);
-//    MENU_ITEM_EDIT(int3, MSG_SPEED, &feedmultiply, 10, 999);
-    //MENU_ITEM_EDIT(int3, MSG_NOZZLE, &target_temperature[0], 0, HEATER_0_MAXTEMP - 15);
-#if TEMP_SENSOR_1 != 0
-    MENU_ITEM_EDIT(int3, MSG_NOZZLE1, &target_temperature[1], 0, HEATER_1_MAXTEMP - 15);
-#endif
-#if TEMP_SENSOR_2 != 0
-    MENU_ITEM_EDIT(int3, MSG_NOZZLE2, &target_temperature[2], 0, HEATER_2_MAXTEMP - 15);
-#endif
-#if TEMP_SENSOR_BED != 0
-    MENU_ITEM_EDIT(int3, MSG_BED, &target_temperature_bed, 0, BED_MAXTEMP - 15);
-#endif
-    //MENU_ITEM_EDIT(int3, MSG_FAN_SPEED, &fanSpeed, 0, 255);
-    //MENU_ITEM_EDIT(int3, MSG_FLOW, &extrudemultiply, 10, 999);
-
-#ifdef BABYSTEPPING
-    #ifdef BABYSTEP_XY
-      MENU_ITEM(submenu, "Babystep X", lcd_babystep_x);
-      MENU_ITEM(submenu, "Babystep Y", lcd_babystep_y);
-    #endif //BABYSTEP_XY
-    MENU_ITEM(submenu, "Babystep Z", lcd_babystep_z);
-#endif
-#ifdef FILAMENTCHANGEENABLE
-     MENU_ITEM(gcode, MSG_FILAMENTCHANGE, PSTR("M600"));
-#endif
-    END_MENU();
-}
-
-
-
 /**************************************************************************************
                                   MENU OK
 **************************************************************************************/
@@ -364,56 +312,35 @@ static void lcd_termostat_menu() {
 	END_MENU();
 }
 
+
 //		END Menu dei parametri
-/**************************************************************************************
-								END MENU OK
-**************************************************************************************/
-static void lcd_move_z()
+
+static void lcd_set_contrast()
 {
-  /*  if (encoderPosition != 0)
+    if (encoderPosition != 0)
     {
-        current_position[Z_AXIS] += float((int)encoderPosition) * move_menu_scale;
-        if (min_software_endstops && current_position[Z_AXIS] < Z_MIN_POS)
-            current_position[Z_AXIS] = Z_MIN_POS;
-        if (max_software_endstops && current_position[Z_AXIS] > Z_MAX_POS)
-            current_position[Z_AXIS] = Z_MAX_POS;
+        lcd_contrast -= encoderPosition;
+        if (lcd_contrast < 0) lcd_contrast = 0;
+        else if (lcd_contrast > 63) lcd_contrast = 63;
         encoderPosition = 0;
-        #ifdef DELTA
-        calculate_delta(current_position);
-        plan_buffer_line(delta[X_AXIS], delta[Y_AXIS], delta[Z_AXIS], current_position[E_AXIS], manual_feedrate[Z_AXIS]/60, 0, LaserPWR);
-        #else
-        plan_buffer_line(current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS], current_position[E_AXIS], manual_feedrate[Z_AXIS]/60, 0, LaserPWR);
-        #endif
         lcdDrawUpdate = 1;
+        u8g.setContrast(lcd_contrast);
     }
     if (lcdDrawUpdate)
     {
-        lcd_implementation_drawedit(PSTR("Z"), ftostr31(current_position[Z_AXIS]));
+        lcd_implementation_drawedit(PSTR("Contrast"), itostr2(lcd_contrast), nullptr);
     }
     if (LCD_CLICKED)
     {
         lcd_quick_feedback();
-        currentMenu = lcd_move_menu_axis;
+        currentMenu = lcd_service_menu;
         encoderPosition = 0;
-    }*/
+    }
 }
 
-
-static void lcd_move_focus()
-{
-	START_MENU();
-	/*MENU_ITEM(back, MSG_MAIN, lcd_laser_menu);
-	MENU_ITEM(submenu, "Zero offset", lcd_zero_offset);
-	MENU_ITEM(gcode, MSG_HOME_Z, PSTR("G28 Z"));
-	MENU_ITEM(submenu, "Muovi fuoco", lcd_move_menu_axisZ);
-	//MENU_ITEM(submenu, "Setta offset", lcd_set_focus_offset);
-	MENU_ITEM(gcode, "Setta offset", PSTR("G92 Z0"));
-#ifdef EEPROM_SETTINGS
-    MENU_ITEM(function, MSG_STORE_EPROM, Config_StoreSettings);*/
-#endif
-	END_MENU();
-    
-}
+/**************************************************************************************
+								END MENU OK
+**************************************************************************************/
 
 static void lcd_control_menu()
 {
@@ -436,28 +363,7 @@ static void lcd_control_menu()
 
 
 
-static void lcd_set_contrast()
-{
-    if (encoderPosition != 0)
-    {
-        lcd_contrast -= encoderPosition;
-        if (lcd_contrast < 0) lcd_contrast = 0;
-        else if (lcd_contrast > 63) lcd_contrast = 63;
-        encoderPosition = 0;
-        lcdDrawUpdate = 1;
-        u8g.setContrast(lcd_contrast);
-    }
-    if (lcdDrawUpdate)
-    {
-        lcd_implementation_drawedit(PSTR("Contrast"), itostr2(lcd_contrast), nullptr);
-    }
-    if (LCD_CLICKED)
-    {
-        lcd_quick_feedback();
-        currentMenu = lcd_control_menu;
-        encoderPosition = 0;
-    }
-}
+
 
 
 
