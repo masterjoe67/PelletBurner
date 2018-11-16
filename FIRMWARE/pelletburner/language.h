@@ -216,6 +216,11 @@
 	#define MSG_PARAMETER               "Parametri"
 	#define MSG_POWERS                  "Livelli pot."
 	#define MSG_POWER1                  "Livello 1"
+	#define MSG_POWER2                  "Livello 2"
+	#define MSG_POWER3                  "Livello 3"
+	#define MSG_POWER4                  "Livello 4"
+	#define MSG_POWER5                  "Livello 5"
+	#define MSG_POWER6                  "Livello 6"
 
 //Messaggi submenu
 	#define MSG_PRE_CLEAN				"Pul. acc."

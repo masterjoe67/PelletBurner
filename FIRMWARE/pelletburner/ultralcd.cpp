@@ -48,7 +48,7 @@ static void lcd_control_menu();
 static void lcd_laser_menu();
 static void lcd_termostat_menu();
 static void lcd_powers_menu();
-static void lcd_power1_menu();
+static void lcd_power_edit_menu();
 
 static void lcd_control_motion_menu();
 
@@ -61,6 +61,7 @@ static void lcd_quick_feedback();//Cause an LCD refresh, and give the user visua
 /* Different types of actions that can be used in menuitems. */
 static void menu_action_back(menuFunc_t data);
 static void menu_action_submenu(menuFunc_t data);
+static void menu_action_rsubmenu(menuFunc_t data, int index);
 static void menu_action_gcode(const char* pgcode);
 static void menu_action_function(menuFunc_t data);
 
@@ -157,7 +158,7 @@ const char* rangeLabel;
 void* editValue;
 int32_t minEditValue, maxEditValue;
 menuFunc_t callbackFunc;
-
+uint8_t powerMenuIndex;
 // placeholders for Ki and Kd edits
 float raw_Ki, raw_Kd;
 bool menu_changed = false;
@@ -214,7 +215,9 @@ static void lcd_status_screen()
     if (feedmultiply > 999)
         feedmultiply = 999;
 }
-
+/***************************************************************************************
+								Special menu return
+****************************************************************************************/
 
 static void lcd_return_from_service()
 {
@@ -234,14 +237,13 @@ static void lcd_return_to_status()
 	currentMenu = lcd_status_screen;
 }
 
-
-
-
 static void lcd_return_to_main() {
 	menu_changed = true;
 	encoderPosition = 0;
 	currentMenu = lcd_main_menu;
 }
+
+
 
 static void lcd_tune_menu()
 {
@@ -316,19 +318,27 @@ static void lcd_parameter_menu()
 static void lcd_powers_menu() {
 	START_MENU();
 	MENU_ITEM(back, MSG_PARAMETER, lcd_parameter_menu);
-	MENU_ITEM(back, MSG_POWER1, lcd_power1_menu);
-
+	MENU_ITEM(rsubmenu, MSG_POWER1, lcd_power_edit_menu, 1);
+	MENU_ITEM(rsubmenu, MSG_POWER2, lcd_power_edit_menu, 2);
+	MENU_ITEM(rsubmenu, MSG_POWER3, lcd_power_edit_menu, 3);
+	MENU_ITEM(rsubmenu, MSG_POWER4, lcd_power_edit_menu, 4);
+	MENU_ITEM(rsubmenu, MSG_POWER5, lcd_power_edit_menu, 5);
+	MENU_ITEM(rsubmenu, MSG_POWER6, lcd_power_edit_menu, 6);
 	END_MENU();
 }
 
-static void lcd_power1_menu() {
+static void lcd_power_edit_menu() {
 	START_MENU();
 	MENU_ITEM(back, MSG_POWERS, lcd_powers_menu);
-	MENU_ITEM_EDIT(int10, MSG_TST_VEN_FUMI, &vel_vent_fumi[0], 300, 2800, PSTR(HELP_VEL_VEN_FUMI), PSTR(RANGE_300_2800_G));
-	MENU_ITEM_EDIT(int10, MSG_TST_VEN_RISC, &vel_vent_riscaldamento[0], 0, 230, PSTR(HELP_TST_VEN_RISC), PSTR(RANGE_0_230_V));
-	MENU_ITEM_EDIT(float21, MSG_TEMP_COCLEA, &tempo_coclea[0], _P27, 60, PSTR(MSG_TEMP_COCLEA), PSTR(RANGE_0_60_S));
+	MENU_ITEM_EDIT(int10, MSG_TST_VEN_FUMI, &vel_vent_fumi[powerMenuIndex], 300, 2800, PSTR(HELP_VEL_VEN_FUMI), PSTR(RANGE_300_2800_G));
+	MENU_ITEM_EDIT(int10, MSG_TST_VEN_RISC, &vel_vent_riscaldamento[powerMenuIndex], 0, 230, PSTR(HELP_TST_VEN_RISC), PSTR(RANGE_0_230_V));
+	MENU_ITEM_EDIT(float21, MSG_TEMP_COCLEA, &tempo_coclea[powerMenuIndex], _P27, 60, PSTR(MSG_TEMP_COCLEA), PSTR(RANGE_0_60_S));
 	END_MENU();
 }
+
+
+
+
 
 static void lcd_timers_menu(){
     START_MENU();
@@ -548,14 +558,21 @@ static void menu_action_back(menuFunc_t data)
     currentMenu = data;
     encoderPosition = 0;
 }
-static void menu_action_submenu(menuFunc_t data)
+
+static void menu_action_rsubmenu(menuFunc_t data, int index)
 {
     currentMenu = data;
     encoderPosition = 0;
+	powerMenuIndex = index - 1;
 }
 
-static void menu_action_function(menuFunc_t data)
+static void menu_action_submenu(menuFunc_t data)
 {
+	currentMenu = data;
+	encoderPosition = 0;
+}
+
+static void menu_action_function(menuFunc_t data){
     (*data)();
 }
 
