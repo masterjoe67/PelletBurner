@@ -5,7 +5,7 @@
 
   void lcd_update();
   void lcd_init();
-  void lcd_setstatus(const char* message);
+  void lcd_setstatus(uint8_t status);
   void lcd_setstatuspgm(const char* message);
   void lcd_setalertstatuspgm(const char* message);
   void lcd_reset_alert_level();

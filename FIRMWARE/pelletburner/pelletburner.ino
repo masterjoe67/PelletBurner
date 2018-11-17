@@ -261,6 +261,8 @@ void superslowloop(){
     //TempAmbiente = LeggeTempAmbiente();
 	
     gestioneModoFunzionamento();
+
+	lcd_setstatus(stato_funzionamento);
  
   if(VelocitaVentolaFumiSetpoint > 0){
         int errore = VelocitaVentolaFumiSetpoint - rpm_measured;

@@ -204,6 +204,9 @@
 
 #if LANGUAGE_CHOICE == 7
 
+	//char* nomi_stati[] = { "Spento", "Check-up", "Accensione", "Stabilizzazione", "Recupero accensione", "Normale", "Modulazione", "Standby", "Sicurezza", "Spegnimento", "Blocco" };
+
+
 	// LCD Menu Messages
 	#define MSG_SERVICE					"Service"
 	#define MSG_TST_VEN_FUMI			"Ven. fumi"

@@ -35,6 +35,7 @@
 #define encrot3 1
 #define LCD_CLICKED (buttons&EN_C)
 
+extern char lcd_status_message[LCD_WIDTH + 1];
 
 extern int feedmultiply;
 

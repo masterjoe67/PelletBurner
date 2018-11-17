@@ -4,7 +4,7 @@ uint16_t VelocitaVentolaFumiSetpoint, VelocitaVentolaFumiOutput;
 uint16_t vel_vent_riscaldamentoOutput;
 volatile uint8_t buttons;  //the last checked buttons in a bit array.
 
-char* nomi_stati[] = {"Spento", "Check-up", "Accensione", "Stabilizzazione", "Recupero accensione", "Normale", "Modulazione", "Standby", "Sicurezza", "Spegnimento", "Blocco"};
+char* nomi_stati[] = {"Spento", "Check-up", "Accensione", "Stabilizzazione", "Recupero accensione", "Normale", "Modulazione", "Standby", "Sicurezza", "Spegnimento", "Blocco", "Service"};
 
 uint16_t _NTC_NOM_RESISTANCE;
 uint16_t _NTC_BETA;        
@@ -14,6 +14,7 @@ bool _candeletta;
 bool _coclea;
 
 int feedmultiply;
+char lcd_status_message[LCD_WIDTH + 1];
 
 uint32_t encoderPosition;
 int8_t encoderDiff; /* encoderDiff is updated from interrupt context and added to encoderPosition every LCD update */

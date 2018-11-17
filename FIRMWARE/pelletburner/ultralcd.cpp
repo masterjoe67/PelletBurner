@@ -14,7 +14,7 @@ static float manual_feedrate[] = { 100, 2, 5 };
 typedef void (*menuFunc_t)();
 
 uint8_t lcd_status_message_level;
-char lcd_status_message[LCD_WIDTH+1] = WELCOME_MSG;
+//char lcd_status_message[LCD_WIDTH+1] = WELCOME_MSG;
 
 
 /* Different menus */
@@ -265,6 +265,9 @@ static void lcd_parameter_menu()
 	MENU_ITEM(submenu, MSG_POWERS, lcd_powers_menu);
 	MENU_ITEM(submenu, MSG_TIMERS, lcd_timers_menu);
 	MENU_ITEM(submenu, MSG_TERMOSTAT, lcd_termostat_menu);
+	MENU_ITEM(function, MSG_STORE_EPROM, Config_StoreSettings);
+	MENU_ITEM(function, MSG_LOAD_EPROM, Config_RetrieveSettings);
+	MENU_ITEM(function, MSG_RESTORE_FAILSAFE, Config_ResetDefault);
     END_MENU();
 }
 
@@ -288,10 +291,6 @@ static void lcd_power_edit_menu() {
 	MENU_ITEM_EDIT(float21, MSG_TEMP_COCLEA, &tempo_coclea[powerMenuIndex], _P27, 60, PSTR(MSG_TEMP_COCLEA), PSTR(RANGE_0_60_S));
 	END_MENU();
 }
-
-
-
-
 
 static void lcd_timers_menu(){
     START_MENU();
@@ -561,11 +560,12 @@ void lcd_update()
     }
 }
 
-void lcd_setstatus(const char* message)
+void lcd_setstatus(uint8_t status)
 {
     if (lcd_status_message_level > 0)
         return;
-    strncpy(lcd_status_message, message, LCD_WIDTH);
+
+    strncpy(lcd_status_message, nomi_stati[status], strlen(nomi_stati[status])+1);
     lcdDrawUpdate = 2;
 }
 void lcd_setstatuspgm(const char* message)

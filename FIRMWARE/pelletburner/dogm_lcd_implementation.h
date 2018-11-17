@@ -29,6 +29,8 @@
 #include "ultralcd.h"
 #include "ultralcd_st7920_u8glib_rrd.h"
 #include <RTClib.h>
+#include "language.h"
+#include "definition.h"
 
 DS1307 rtc;
 
@@ -68,6 +70,8 @@ U8GLIB_SSD1306_128X64 u8g(LCD_CS_PIN, LCD_A0_PIN);
 // for regular DOGM128 display with HW-SPI
 U8GLIB_DOGM128 u8g(DOGLCD_CS, DOGLCD_A0);	// HW-SPI Com: CS, A0
 #endif
+
+int lengthChar(const char* str);
 
 static void lcd_implementation_init()
 {
@@ -179,7 +183,7 @@ static void lcd_implementation_status_screen()
 		u8g.print(buf);
 	}
 
-    u8g.setFont(u8g_font_6x10_marlin);
+  /*  u8g.setFont(u8g_font_6x10_marlin);
 	//Stato
 	switch (stato_funzionamento) {
 		case spento:
@@ -242,9 +246,10 @@ static void lcd_implementation_status_screen()
 			lcd_printPGM(PSTR("Pulizzia"));
 			break;
 
-	}
+	}*/
 
 	//Temperature
+	u8g.setFont(u8g_font_6x10_marlin);
 	u8g.setPrintPos(1, 8);
 	lcd_printPGM(PSTR("Fumi"));
 	u8g.setPrintPos(1, 16);
@@ -264,128 +269,14 @@ static void lcd_implementation_status_screen()
 		//else u8g.drawBitmapP(9,1,STATUS_SCREENBYTEWIDTH,STATUS_SCREENHEIGHT,status_screen1_bmp);
 
 	
-   //Serial.print("caz    ");
+  
 
-	
-		// Extruder 1
-		//u8g.setFont(FONT_STATUSMENU);
-		//u8g.setPrintPos(6,6);
-		//u8g.print(itostr3(int(123)));
-		//lcd_printPGM(PSTR(LCD_STR_DEGREE " "));
-		//u8g.setPrintPos(6,27);
-		//u8g.print(itostr3(int(124)));
-		//lcd_printPGM(PSTR(LCD_STR_DEGREE " "));
-		
-	/*		u8g.setColorIndex(0);	// white on black
-			u8g.drawBox(13,17,2,2);
-			u8g.setColorIndex(1);	// black on white
-		
-
-		// Extruder 2
-		u8g.setFont(FONT_STATUSMENU);
-#if EXTRUDERS > 1
-		u8g.setPrintPos(31,6);
-		u8g.print(itostr3(int(degTargetHotend(1) + 0.5)));
-		lcd_printPGM(PSTR(LCD_STR_DEGREE " "));
-		u8g.setPrintPos(31,27);
-		u8g.print(itostr3(int(degHotend(1) + 0.5)));
-		lcd_printPGM(PSTR(LCD_STR_DEGREE " "));
-		if (!isHeatingHotend(1)) u8g.drawBox(38,17,2,2);
-		else
-		{
-			u8g.setColorIndex(0);	// white on black
-			u8g.drawBox(38,17,2,2);
-			u8g.setColorIndex(1);	// black on white
-		}
-#else
-		u8g.setPrintPos(31,27);
-		u8g.print("---");
-#endif
-
-		// Extruder 3
-		u8g.setFont(FONT_STATUSMENU);
-# if EXTRUDERS > 2
-		u8g.setPrintPos(55,6);
-		u8g.print(itostr3(int(degTargetHotend(2) + 0.5)));
-		lcd_printPGM(PSTR(LCD_STR_DEGREE " "));
-		u8g.setPrintPos(55,27);
-		u8g.print(itostr3(int(degHotend(2) + 0.5)));
-		lcd_printPGM(PSTR(LCD_STR_DEGREE " "));
-		if (!isHeatingHotend(2)) u8g.drawBox(62,17,2,2);
-		else
-		{
-			u8g.setColorIndex(0);	// white on black
-			u8g.drawBox(62,17,2,2);
-			u8g.setColorIndex(1);	// black on white
-		}
-#else
-		u8g.setPrintPos(55,27);
-		u8g.print("---");
-#endif
-
-		// Heatbed
-		u8g.setFont(FONT_STATUSMENU);
-		u8g.setPrintPos(81,6);
-		u8g.print(itostr3(int(125)));
-		lcd_printPGM(PSTR(LCD_STR_DEGREE " "));
-		u8g.setPrintPos(81,27);
-		u8g.print(itostr3(int(126)));
-		lcd_printPGM(PSTR(LCD_STR_DEGREE " "));
-
-		
-			u8g.setColorIndex(0);	// white on black
-			u8g.drawBox(88,18,2,2);
-			u8g.setColorIndex(1);	// black on white
-		
-
-		// Fan
-		u8g.setFont(FONT_STATUSMENU);
-		u8g.setPrintPos(104,27);
-#if defined(FAN_PIN) && FAN_PIN > -1
-		u8g.print(itostr3(int((fanSpeed*100)/256 + 1)));
-		u8g.print("%");
-#else
-		u8g.print("---");
-#endif
-	}
-
-	// X, Y, Z-Coordinates
-	u8g.setFont(FONT_STATUSMENU);
-	u8g.drawBox(0,29,128,10);
-	u8g.setColorIndex(0);	// white on black
-	u8g.setPrintPos(2,37);
-	u8g.print("X");
-	u8g.drawPixel(8,33);
-	u8g.drawPixel(8,35);
-	u8g.setPrintPos(10,37);
-	//u8g.print(ftostr31ns(current_position[X_AXIS]));
-	u8g.setPrintPos(43,37);
-	lcd_printPGM(PSTR("Y"));
-	u8g.drawPixel(49,33);
-	u8g.drawPixel(49,35);
-	u8g.setPrintPos(51,37);
-	//u8g.print(ftostr31ns(current_position[Y_AXIS]));
-	u8g.setPrintPos(83,37);
-	u8g.print("Z");
-	u8g.drawPixel(89,33);
-	u8g.drawPixel(89,35);
-	u8g.setPrintPos(91,37);
-	//u8g.print(ftostr31(current_position[Z_AXIS]));
-	u8g.setColorIndex(1);	// black on white
-
-	// Feedrate
-	u8g.setFont(u8g_font_6x10_marlin);
-	u8g.setPrintPos(3,49);
-	u8g.print(LCD_STR_FEEDRATE[0]);
-	u8g.setFont(FONT_STATUSMENU);
-	u8g.setPrintPos(12,48);
-	//u8g.print(itostr3(feedmultiply));
-	u8g.print('%');
 
 	// Status line
-	u8g.setFont(FONT_STATUSMENU);
-	u8g.setPrintPos(0,61);
-	//u8g.print(lcd_status_message);*/
+	u8g.setFont(u8g_font_6x10_marlin);
+	int xpos = (LCD_WIDTH - lengthChar(lcd_status_message) + 1) / 2 * DOG_CHAR_WIDTH;
+	u8g.setPrintPos(xpos,61);
+	u8g.print(lcd_status_message);
 
 }
 
@@ -523,9 +414,13 @@ static void lcd_implementation_drawmenu_setting_edit_generic_P(uint8_t row, cons
 
 int lengthChar(const char* str) {
 	int n = 0;
-	char c;
+	/*char c;
 	while ((c = pgm_read_byte(str++)) != '\0')
-		n++;
+		n++;*/
+
+	n = strlen(str);
+	//Serial.print("n= ");
+	//Serial.println(n);
 	return n;
 }
 
@@ -533,7 +428,8 @@ void lcd_implementation_drawedit(const char* pstr, char* value, const char* rang
 {
 	int xpos = 0;
 	u8g.setPrintPos(0 * DOG_CHAR_WIDTH, DOG_CHAR_HEIGHT);
-	u8g.setFont(FONT_STATUSMENU);
+	//u8g.setFont(FONT_STATUSMENU);
+	u8g.setFont(u8g_font_6x10_marlin);
 	lcd_printPGM(pstr);
 	if (range != nullptr){
 		xpos = (LCD_WIDTH - lengthChar(range) + 1) / 2 * DOG_CHAR_WIDTH;
