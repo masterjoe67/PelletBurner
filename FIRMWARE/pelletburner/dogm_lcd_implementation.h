@@ -154,6 +154,16 @@ static void lcd_printPGM(const char* str)
     }
 }
 
+static void lcd_printPGM_SL(const char* str, int start, int lenght)
+{
+	char c;
+	int count = 0;
+	str += start;
+	while ((count++ <= lenght) && ((c = pgm_read_byte(str++)) != '\0')){
+		u8g.print(c);
+	}
+}
+
 static bool pari = false;
 
 static void lcd_implementation_status_screen()
@@ -278,7 +288,7 @@ static void lcd_implementation_status_screen()
 	int xpos = (LCD_WIDTH - lengthChar(lcd_status_message) + 1) / 2 * DOG_CHAR_WIDTH;
 	u8g.setPrintPos(xpos,61);
 	u8g.print(lcd_status_message);
-	Serial.println(lengthChar(lcd_status_message));
+	//Serial.println(lengthChar(lcd_status_message));
 }
 
 static void lcd_implementation_drawmenu_generic(uint8_t row, const char* pstr, char pre_char, char post_char)
@@ -425,16 +435,42 @@ int lengthChar(const char* str) {
 	return n;
 }
 
+int lengthChar2(const char* str) {
+	int n = 0;
+	char c;
+	while ((c = pgm_read_byte(str++)) != '\0')
+	n++;
+
+
+	//Serial.print("n= ");
+	//Serial.println(n);
+	return n;
+}
+
 void lcd_implementation_drawedit(const char* pstr, char* value, const char* range)
 {
 	int xpos = 0;
+	int len = lengthChar2(pstr);
+	int line = 1;
 
-	u8g.setPrintPos(0 * DOG_CHAR_WIDTH, DOG_CHAR_HEIGHT);
 	u8g.setFont(u8g_font_6x10_marlin);
-	lcd_printPGM(pstr);
+	//Serial.println(len);
+	if (len<21){
+		xpos = (LCD_WIDTH - lengthChar2(pstr) + 1) / 2 * DOG_CHAR_WIDTH;
+		u8g.setPrintPos(xpos, DOG_CHAR_HEIGHT);
+		lcd_printPGM(pstr);
+	}
+	else {
+		u8g.setPrintPos(0 * DOG_CHAR_WIDTH, DOG_CHAR_HEIGHT);
+		lcd_printPGM_SL(pstr, 0, LCD_WIDTH);
+		line++;
+		u8g.setPrintPos(0 * DOG_CHAR_WIDTH, DOG_CHAR_HEIGHT * line);
+		lcd_printPGM_SL(pstr, LCD_WIDTH + 1, LCD_WIDTH);
+	}
+	line++;
 	if (range != nullptr){
-		xpos = (LCD_WIDTH - lengthChar(range) + 1) / 2 * DOG_CHAR_WIDTH;
-		u8g.setPrintPos(xpos, 2 * DOG_CHAR_HEIGHT);
+		xpos = (LCD_WIDTH - lengthChar2(range) + 1) / 2 * DOG_CHAR_WIDTH;
+		u8g.setPrintPos(xpos, DOG_CHAR_HEIGHT * line);
 		lcd_printPGM(range);
 	}
 	u8g.setFont(u8g_font_9x18);
