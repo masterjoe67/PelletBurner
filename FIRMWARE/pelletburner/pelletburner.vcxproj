@@ -123,13 +123,25 @@
       <FileType>CppCode</FileType>
     </ClInclude>
     <ClInclude Include="DOGMbitmaps.h" />
+    <ClInclude Include="dogm_font_data_anulu3d.h">
+      <FileType>CppCode</FileType>
+    </ClInclude>
     <ClInclude Include="dogm_lcd_implementation.h" />
     <ClInclude Include="fastio.h" />
+    <ClInclude Include="language.h">
+      <FileType>CppCode</FileType>
+    </ClInclude>
     <ClInclude Include="pelletburner.h" />
     <ClInclude Include="thermistor.h">
       <FileType>CppCode</FileType>
     </ClInclude>
     <ClInclude Include="ultralcd.h" />
+    <ClInclude Include="ultralcd_implementation_hitachi_HD44780.h">
+      <FileType>CppCode</FileType>
+    </ClInclude>
+    <ClInclude Include="ultralcd_st7920_u8glib_rrd.h">
+      <FileType>CppCode</FileType>
+    </ClInclude>
     <ClInclude Include="__vm\.pelletburner.vsarduino.h" />
   </ItemGroup>
   <ItemGroup>

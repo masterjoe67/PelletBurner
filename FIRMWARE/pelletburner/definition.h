@@ -133,6 +133,8 @@ extern uint8_t lastEncoderBits;
 
 #define LCD_CLICKED (buttons&EN_C)
 
+extern uint8_t _seconds;
+
 extern volatile uint8_t buttons;  //the last checked buttons in a bit array.
 extern uint16_t VelocitaVentolaFumiSetpoint, VelocitaVentolaFumiOutput;
 extern uint16_t vel_vent_riscaldamentoOutput;

@@ -104,6 +104,8 @@ void loop() {
 	
 	if ((timer - onehz_loop_timer) >= 1000) {	
 		onehz_loop_timer = timer;
+		_seconds++;
+		if (_seconds >= 60) _seconds = 0;
 		superslowloop();	
 	}	
 

@@ -10,6 +10,8 @@ uint16_t _NTC_NOM_RESISTANCE;
 uint16_t _NTC_BETA;        
 uint16_t _NTC_SERIES_RES;
 
+uint8_t _seconds;
+
 bool _candeletta;
 bool _coclea;
 

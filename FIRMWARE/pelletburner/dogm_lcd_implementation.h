@@ -163,6 +163,7 @@ static void lcd_implementation_status_screen()
 
 	uint8_t ore = now.hour();
 	uint8_t minuti = now.minute();
+
 	char buf[20];
 	static unsigned char fan_rot = 0;
 	if (ore > 24)
@@ -174,7 +175,7 @@ static void lcd_implementation_status_screen()
 	//Orologio
     u8g.setFont(u8g_font_10x20);
     u8g.setPrintPos(39, 40);
-	if ((blink % 2)) {
+	if (_seconds % 2 == 0) {
 		sprintf(buf, "%02d %02d ", ore, minuti);
 		u8g.print(buf);
 	}
@@ -277,7 +278,7 @@ static void lcd_implementation_status_screen()
 	int xpos = (LCD_WIDTH - lengthChar(lcd_status_message) + 1) / 2 * DOG_CHAR_WIDTH;
 	u8g.setPrintPos(xpos,61);
 	u8g.print(lcd_status_message);
-
+	Serial.println(lengthChar(lcd_status_message));
 }
 
 static void lcd_implementation_drawmenu_generic(uint8_t row, const char* pstr, char pre_char, char post_char)
@@ -427,8 +428,8 @@ int lengthChar(const char* str) {
 void lcd_implementation_drawedit(const char* pstr, char* value, const char* range)
 {
 	int xpos = 0;
+
 	u8g.setPrintPos(0 * DOG_CHAR_WIDTH, DOG_CHAR_HEIGHT);
-	//u8g.setFont(FONT_STATUSMENU);
 	u8g.setFont(u8g_font_6x10_marlin);
 	lcd_printPGM(pstr);
 	if (range != nullptr){

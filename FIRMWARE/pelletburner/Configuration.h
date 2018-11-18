@@ -85,7 +85,7 @@
 
 
 //Termostati
-#define Th01   700      //Termostato stufa spenta
+#define Th01   700     //Termostato stufa spenta
 #define Th02   80      //Termostato disattivazione candeletta
 #define Th03   70      //Termostato prespegnimento mancanza fiamma
 #define Th05   80      //Termostato attivazione ventola riscaldamento
