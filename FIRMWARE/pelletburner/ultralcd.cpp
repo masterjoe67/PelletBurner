@@ -142,8 +142,7 @@ void* editValue;
 int32_t minEditValue, maxEditValue;
 menuFunc_t callbackFunc;
 uint8_t powerMenuIndex;
-// placeholders for Ki and Kd edits
-float raw_Ki, raw_Kd;
+
 bool menu_changed = false;
 
 
@@ -172,24 +171,24 @@ static void lcd_status_screen()
     }
 
     // Dead zone at 100% feedrate
-    if ((feedmultiply < 100 && (feedmultiply + int(encoderPosition)) > 100) ||
-            (feedmultiply > 100 && (feedmultiply + int(encoderPosition)) < 100))
+    if ((feedmultiply < 60 && (feedmultiply + int(encoderPosition)) > 60) ||
+            (feedmultiply > 60 && (feedmultiply + int(encoderPosition)) < 60))
     {
         encoderPosition = 0;
-        feedmultiply = 100;
+        feedmultiply = 60;
     }
 
-    if (feedmultiply == 100 && int(encoderPosition) > ENCODER_FEEDRATE_DEADZONE)
+    if (feedmultiply == 60 && int(encoderPosition) > ENCODER_FEEDRATE_DEADZONE)
     {
         feedmultiply += int(encoderPosition) - ENCODER_FEEDRATE_DEADZONE;
         encoderPosition = 0;
     }
-    else if (feedmultiply == 100 && int(encoderPosition) < -ENCODER_FEEDRATE_DEADZONE)
+    else if (feedmultiply == 60 && int(encoderPosition) < -ENCODER_FEEDRATE_DEADZONE)
     {
         feedmultiply += int(encoderPosition) + ENCODER_FEEDRATE_DEADZONE;
         encoderPosition = 0;
     }
-    else if (feedmultiply != 100)
+    else if (feedmultiply != 60)
     {
         feedmultiply += int(encoderPosition);
         encoderPosition = 0;
@@ -197,8 +196,10 @@ static void lcd_status_screen()
 
     if (feedmultiply < 10)
         feedmultiply = 10;
-    if (feedmultiply > 999)
-        feedmultiply = 999;
+    if (feedmultiply > 60)
+        feedmultiply = 60;
+
+	potenzaSelezionata = feedmultiply / 10;
 }
 /***************************************************************************************
 								Special menu return
@@ -313,9 +314,13 @@ static void lcd_termostat_menu() {
 	START_MENU();
 	MENU_ITEM(back, MSG_PARAMETER, lcd_parameter_menu);
 	MENU_ITEM_EDIT(int3, MSG_STUFA_SPENTA, &_Th01, 0, 250, PSTR(MSG_STUFA_SPENTA), PSTR(RANGE_0_250_C));
-	MENU_ITEM_EDIT(int3, MSG_DIS_CANDELETTA, &_Th02, 0, 250, PSTR(HELP_DIS_CANDELETTA), PSTR(RANGE_0_250_C));
-	MENU_ITEM_EDIT(int3, MSG_MANCANZA_FIAMMA, &_Th03, 0, 250, PSTR(HELP_MANCANZA_FIAMMA), PSTR(RANGE_0_250_C));
-	MENU_ITEM_EDIT(int3, MSG_MANCANZA_FIAMMA, &_Th05, 0, 250, PSTR(HELP_MANCANZA_FIAMMA), PSTR(RANGE_0_250_C));
+	MENU_ITEM_EDIT(int3, MSG_DIS_CANDELETTA, &_Th02, 0, 850, PSTR(HELP_DIS_CANDELETTA), PSTR(RANGE_0_250_C));
+	MENU_ITEM_EDIT(int3, MSG_MANCANZA_FIAMMA, &_Th03, 0, 850, PSTR(HELP_MANCANZA_FIAMMA), PSTR(RANGE_0_250_C));
+	MENU_ITEM_EDIT(int3, MSG_ATTIV_VENT_RISC, &_Th05, 0, 850, PSTR(HELP_ATTIV_VENT_RISC), PSTR(RANGE_0_250_C));
+	MENU_ITEM_EDIT(int3, MSG_PASS_STAB, &_Th06, 0, 850, PSTR(HELP_PASS_STAB), PSTR(RANGE_0_250_C));
+	MENU_ITEM_EDIT(int3, MSG_MOD_FUMI, &_Th07, 0, 850, PSTR(HELP_MOD_FUMI), PSTR(RANGE_0_250_C));
+	MENU_ITEM_EDIT(int3, MSG_SIC_FUMI, &_Th08, 0, 850, PSTR(HELP_SIC_FUMI), PSTR(RANGE_0_250_C));
+	MENU_ITEM_EDIT(int3, MSG_BYP_ACC, &_Th09, 0, 850, PSTR(HELP_BYP_ACC), PSTR(RANGE_0_250_C));
 	END_MENU();
 }
 

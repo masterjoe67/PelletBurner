@@ -27,7 +27,7 @@
 #define NTC_BETA           3950          // thermistor's beta coefficient
 #define NTC_SERIES_RES     10000         // Value of the series resistor
 
-#define DEFAULT_USER_TEMP 20             //Setpoint temperatura ambiente
+#define DEFAULT_USER_TEMP 40             //Setpoint temperatura ambiente
 
 //Tempi coclea
 #define C01    2.0f    //Potenza accensione            0      60[s]
@@ -88,10 +88,10 @@
 #define Th01   700     //Termostato stufa spenta
 #define Th02   80      //Termostato disattivazione candeletta
 #define Th03   70      //Termostato prespegnimento mancanza fiamma
-#define Th05   80      //Termostato attivazione ventola riscaldamento
-#define Th06   80      //Termostato passaggio in stabilizzazione da variabile
-#define Th07   80      //Termostato modulazione fumi
-#define Th08   80      //Termostato sicurezza fumi
+#define Th05   650      //Termostato attivazione ventola riscaldamento
+#define Th06   650      //Termostato passaggio in stabilizzazione da variabile
+#define Th07   660      //Termostato modulazione fumi
+#define Th08   800      //Termostato sicurezza fumi
 #define Th09  100      //Termostato bypass accensione
 
 #define Th35  100      //Termostato spegnimento potenza 1

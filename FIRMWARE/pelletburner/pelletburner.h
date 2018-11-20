@@ -33,7 +33,7 @@ float cocleaTime = 0;
 unsigned int faseAccensione = 0;
 unsigned int nAccensioni = 1;
 bool mancataAcc = false;
-unsigned int potenzaSelezionata = 1;
+//unsigned int potenzaSelezionata = 1;
 
 bool menuActive = false;
 

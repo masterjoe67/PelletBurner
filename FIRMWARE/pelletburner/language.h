@@ -79,6 +79,11 @@
 	#define MSG_STUFA_SPENTA			"Stufa spenta"
 	#define MSG_DIS_CANDELETTA			"Disatt. cand."
 	#define MSG_MANCANZA_FIAMMA			"Manca fiamma"
+	#define MSG_ATTIV_VENT_RISC			"Att. vent. risc."
+	#define MSG_PASS_STAB				"Pass. in stab."
+	#define MSG_MOD_FUMI				"Mod. fumi"
+	#define MSG_SIC_FUMI				"Sic. fumi"
+	#define MSG_BYP_ACC					"Bypass acc."
 //Messaggi estesi
 	#define HELP_VEL_VEN_FUMI			"Velocita ventola fumi"
 	#define HELP_PRE_CLEAN				"Puliz. in  accensione"
@@ -95,6 +100,11 @@
 	#define HELP_PUL_SPEGN				"Pulizia in spegnime."
 	#define HELP_DIS_CANDELETTA			"Disatt. candeletta"
 	#define HELP_MANCANZA_FIAMMA		"Mancanza fiamma"
+	#define HELP_ATTIV_VENT_RISC		"Attivazione ventola  riscaldamento"
+	#define HELP_PASS_STAB				"Passaggio da variabile in stabilizzazione"
+	#define HELP_MOD_FUMI				"Modulazione fumi"
+	#define HELP_SIC_FUMI				"Sicurezza fumi"
+	#define HELP_BYP_ACC				"Bypass accensione"
 //Messaggi di range
 	#define RANGE_0_900_S				"[0..900 sec.]"
 	#define RANGE_0_60_S				"[0..60 sec.]"

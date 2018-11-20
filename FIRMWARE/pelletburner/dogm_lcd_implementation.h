@@ -24,7 +24,7 @@
 //#define U8GLIB_SSD1306
 
 #include <U8glib.h>
-#include "DOGMbitmaps.h"
+#include "bitmaps.h"
 #include "dogm_font_data_anulu3d.h"
 #include "ultralcd.h"
 #include "ultralcd_st7920_u8glib_rrd.h"
@@ -168,7 +168,7 @@ static bool pari = false;
 
 static void lcd_implementation_status_screen()
 {
-	
+
 	DateTime now = rtc.now();
 
 	uint8_t ore = now.hour();
@@ -183,8 +183,8 @@ static void lcd_implementation_status_screen()
 	u8g.setColorIndex(1);	// black on white
 
 	//Orologio
-    u8g.setFont(u8g_font_10x20);
-    u8g.setPrintPos(39, 40);
+	u8g.setFont(u8g_font_10x20);
+	u8g.setPrintPos(39, 40);
 	if (_seconds % 2 == 0) {
 		sprintf(buf, "%02d %02d ", ore, minuti);
 		u8g.print(buf);
@@ -194,72 +194,72 @@ static void lcd_implementation_status_screen()
 		u8g.print(buf);
 	}
 
-  /*  u8g.setFont(u8g_font_6x10_marlin);
-	//Stato
-	switch (stato_funzionamento) {
-		case spento:
-			u8g.setPrintPos(45, 63);
-			lcd_printPGM(PSTR("Spento"));
-		    break;
+	/*  u8g.setFont(u8g_font_6x10_marlin);
+	  //Stato
+	  switch (stato_funzionamento) {
+		  case spento:
+			  u8g.setPrintPos(45, 63);
+			  lcd_printPGM(PSTR("Spento"));
+			  break;
 
-		case check_up:
-			u8g.setPrintPos(45, 63);
-			lcd_printPGM(PSTR("Check-up"));
-		    break;
+		  case check_up:
+			  u8g.setPrintPos(45, 63);
+			  lcd_printPGM(PSTR("Check-up"));
+			  break;
 
-		case accensione:
-			u8g.setPrintPos(45, 63);
-			lcd_printPGM(PSTR("Accensione"));
-			break;
-      
-		case stabilizzazione:
-			u8g.setPrintPos(45, 63);
-			lcd_printPGM(PSTR("Stabilizzazione"));
-			break;
+		  case accensione:
+			  u8g.setPrintPos(45, 63);
+			  lcd_printPGM(PSTR("Accensione"));
+			  break;
 
-		case recupero_acc:
-			u8g.setPrintPos(45, 63);
-			lcd_printPGM(PSTR("2' accensione"));
-			break;
+		  case stabilizzazione:
+			  u8g.setPrintPos(45, 63);
+			  lcd_printPGM(PSTR("Stabilizzazione"));
+			  break;
 
-		case normale:
-			u8g.setPrintPos(45, 63);
-			lcd_printPGM(PSTR("Normale"));
-			break;
+		  case recupero_acc:
+			  u8g.setPrintPos(45, 63);
+			  lcd_printPGM(PSTR("2' accensione"));
+			  break;
 
-		case modulazione:
-			u8g.setPrintPos(45, 63);
-			lcd_printPGM(PSTR("Risparmio"));
-			break;
+		  case normale:
+			  u8g.setPrintPos(45, 63);
+			  lcd_printPGM(PSTR("Normale"));
+			  break;
 
-		case standby:
-			u8g.setPrintPos(45, 63);
-			lcd_printPGM(PSTR("Stand-by"));
-			break;
+		  case modulazione:
+			  u8g.setPrintPos(45, 63);
+			  lcd_printPGM(PSTR("Risparmio"));
+			  break;
 
-		case sicurezza:
-			u8g.setPrintPos(45, 63);
-			lcd_printPGM(PSTR("Sicurezza"));
-			break;
+		  case standby:
+			  u8g.setPrintPos(45, 63);
+			  lcd_printPGM(PSTR("Stand-by"));
+			  break;
 
-		case spegnimento:
-			u8g.setPrintPos(45, 63);
-			lcd_printPGM(PSTR("Spegnimento"));
-			break;
+		  case sicurezza:
+			  u8g.setPrintPos(45, 63);
+			  lcd_printPGM(PSTR("Sicurezza"));
+			  break;
 
-		case blocco:
-			u8g.setPrintPos(45, 63);
-			lcd_printPGM(PSTR("Blocco"));
-			break;
+		  case spegnimento:
+			  u8g.setPrintPos(45, 63);
+			  lcd_printPGM(PSTR("Spegnimento"));
+			  break;
 
-		case pulizzia:
-			u8g.setPrintPos(45, 63);
-			lcd_printPGM(PSTR("Pulizzia"));
-			break;
+		  case blocco:
+			  u8g.setPrintPos(45, 63);
+			  lcd_printPGM(PSTR("Blocco"));
+			  break;
 
-	}*/
+		  case pulizzia:
+			  u8g.setPrintPos(45, 63);
+			  lcd_printPGM(PSTR("Pulizzia"));
+			  break;
 
-	//Temperature
+	  }*/
+
+	  //Temperature
 	u8g.setFont(u8g_font_6x10_marlin);
 	u8g.setPrintPos(1, 8);
 	lcd_printPGM(PSTR("Fumi"));
@@ -274,15 +274,20 @@ static void lcd_implementation_status_screen()
 	lcd_printPGM(PSTR(LCD_STR_DEGREE " "));
 
 
-
-		//Symbols menu graphics, animated fan
-		//if ((blink % 2) && VelocitaVentolaFumiSetpoint)	u8g.drawBitmapP(9,1,STATUS_SCREENBYTEWIDTH,STATUS_SCREENHEIGHT,status_screen0_bmp);
-		//else u8g.drawBitmapP(9,1,STATUS_SCREENBYTEWIDTH,STATUS_SCREENHEIGHT,status_screen1_bmp);
+	switch (stato_funzionamento){
+		case normale:
+		case pulizzia:
+			// potenzaSelezionata
+			u8g.drawBitmapP(115, 20, PWR0_BMPBYTEWIDTH, PWR0_BMPHEIGHT, pwr_bmp[potenzaSelezionata]);
+			break;
+		default:
+			u8g.drawBitmapP(115, 20, PWR0_BMPBYTEWIDTH, PWR0_BMPHEIGHT, pwr_bmp[0]);
+			break;
+	}
+	
 
 	
   
-
-
 	// Status line
 	u8g.setFont(u8g_font_6x10_marlin);
 	int xpos = (LCD_WIDTH - lengthChar(lcd_status_message) + 1) / 2 * DOG_CHAR_WIDTH;

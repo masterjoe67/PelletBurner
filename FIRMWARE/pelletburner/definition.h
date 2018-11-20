@@ -135,6 +135,8 @@ extern uint8_t lastEncoderBits;
 
 extern uint8_t _seconds;
 
+extern unsigned int potenzaSelezionata;
+
 extern volatile uint8_t buttons;  //the last checked buttons in a bit array.
 extern uint16_t VelocitaVentolaFumiSetpoint, VelocitaVentolaFumiOutput;
 extern uint16_t vel_vent_riscaldamentoOutput;

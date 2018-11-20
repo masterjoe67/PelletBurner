@@ -12,6 +12,8 @@ uint16_t _NTC_SERIES_RES;
 
 uint8_t _seconds;
 
+unsigned int potenzaSelezionata = 1;
+
 bool _candeletta;
 bool _coclea;
 
