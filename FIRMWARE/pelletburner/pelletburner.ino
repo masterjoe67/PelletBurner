@@ -32,45 +32,36 @@ bool micros_overflow(){
 	}
 }
 
-void setup () {
-    Serial.begin(57600);
-    stato_funzionamento = spento;
-    Config_RetrieveSettings();
-    AnalogInit();
-    pinMode(ZERO_PIN, INPUT);
-    pinMode(PWM_PIN, OUTPUT);
-    pinMode(RPM_INPUT, INPUT_PULLUP);
-    pinMode(COCLEA_PIN, OUTPUT);
-    pinMode(CAND_PIN, OUTPUT);
+void setup() {
+	Serial.begin(57600);
+	stato_funzionamento = spento;
+	Config_RetrieveSettings();
+	AnalogInit();
+
+	pinMode(ZERO_PIN, INPUT);
+	pinMode(PWM_PIN, OUTPUT);
+	pinMode(RPM_INPUT, INPUT_PULLUP);
+	pinMode(COCLEA_PIN, OUTPUT);
+	pinMode(CAND_PIN, OUTPUT);
 	pinMode(BTN_ST, INPUT_PULLUP);
 
-   // pinMode(KEY_START_STOP, INPUT_PULLUP);
-	//pinMode(KEY_MENU, INPUT_PULLUP);
 
-    attachInterrupt(1, rpm_fun, RISING);
-    //Initialize PWM operation.
-    //Mains frequency: 50Hz.
-    //Zero crossing point reached whenever pulse to PIN2 changes
-    //Duty cycle = 0..255. 0:always off. 255: always on. 150: 59% on.
-    ACpwm.initialize(50,ZERO_PIN,RISING,PWM_PIN,PWM_AUX_PIN,100);
-    //Latching on HIGH zero state: 3 microseconds.
-    //Latching on LOW zero cross state: 5 microseconds.
-    ACpwm.setLatch(3,15);
-    
-    VelocitaVentolaFumiSetpoint = 0;
 
-    TempAmbiente = LeggeTempAmbiente();
-    
-	
+	attachInterrupt(1, rpm_fun, RISING);
+	//Initialize PWM operation.
+	//Mains frequency: 50Hz.
+	//Zero crossing point reached whenever pulse to PIN2 changes
+	//Duty cycle = 0..255. 0:always off. 255: always on. 150: 59% on.
+	ACpwm.initialize(50, ZERO_PIN, RISING, PWM_PIN, PWM_AUX_PIN, 100);
+	//Latching on HIGH zero state: 3 microseconds.
+	//Latching on LOW zero cross state: 5 microseconds.
+	ACpwm.setLatch(3, 15);
 
- /*   rtc.begin();
+	VelocitaVentolaFumiSetpoint = 0;
 
-  if (! rtc.isrunning()) {
-    Serial.println("RTC is NOT running!");
-    // following line sets the RTC to the date & time this sketch was compiled
-    rtc.adjust(DateTime(__DATE__, __TIME__));
-  }*/
-  lcd_init();
+	TempAmbiente = LeggeTempAmbiente();
+
+	lcd_init();
 }
 
 
@@ -203,33 +194,41 @@ void buttons_update()
 	}
 	lastEncoderBits = enc;
 }
-int startBtnDly = 0;
+
 //10hz stuff goes here
 void slowloop() {
 	digitalWrite(BoardLED, LOW);
 	lcd_update();
-	//Serial.println(buttons);
-	if (buttons&START_STOP)
-	{
+	//
+	if (buttons&START_STOP) {
 		startBtnDly++;
-		if (startBtnDly > 50)
-			startBurner();
-
+//Serial.println(buttons);
+		if (startBtnDly >= 100) {
+			switch (stato_funzionamento) {
+			case spento:
+				startBurner();
+				lcd_buzz();
+				break;
+			case modulazione:
+			case normale:
+			case pulizzia:
+				stopBurner();
+				lcd_buzz();
+				break;
+			}
+		}
 	}
-
 	else
 		startBtnDly = 0;
-    
-    if(TimCocleaStarted){
+
+	if (TimCocleaStarted) {
 		TimCocleaCount--;
-		if(TimCocleaCount <= 0) {
-            digitalWrite(COCLEA_PIN, OFF);
-            TimCocleaStarted = false;
+		if (TimCocleaCount <= 0) {
+			digitalWrite(COCLEA_PIN, OFF);
+			TimCocleaStarted = false;
 			_coclea = false;
-        }
+		}
 	}
-    
-    
 }
 
 
@@ -845,4 +844,9 @@ void startBurner(){
     nAccensioni = 1;
     mancataAcc = false;
     stato_funzionamento = check_up;
+}
+
+void stopBurner() {
+	stato_funzionamento = spegnimento;
+
 }

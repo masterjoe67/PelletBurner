@@ -37,6 +37,9 @@ bool mancataAcc = false;
 
 bool menuActive = false;
 
+uint8_t startBtnDly = 0;
+uint8_t btnFunc = 0;
+
 long lasttime = 0;         // the last time the output pin was sampled
 int debounce_count = 10; // number of millis/samples to consider before declaring a debounced input
 int counter = 0;       // how many times we have seen new value

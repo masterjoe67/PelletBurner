@@ -214,6 +214,7 @@ static void lcd_return_from_service()
 	menu_changed = true;
 	encoderPosition = 0;
 	currentMenu = lcd_main_menu;
+	stato_funzionamento = spento;
 }
 
 static void lcd_return_to_status()
@@ -240,7 +241,8 @@ static void lcd_main_menu()
 	MENU_ITEM(submenu, MSG_PARAMETER, lcd_parameter_menu);
 	
 	//MENU_ITEM(submenu, MSG_CONTROL, lcd_control_menu);
-	MENU_ITEM(submenu, MSG_SERVICE, lcd_service_menu);
+	if(stato_funzionamento == spento)
+		MENU_ITEM(submenu, MSG_SERVICE, lcd_service_menu);
     END_MENU();
 }
 
@@ -290,6 +292,7 @@ static void lcd_power_edit_menu() {
 	MENU_ITEM_EDIT(int10, MSG_TST_VEN_FUMI, &vel_vent_fumi[powerMenuIndex], 300, 2800, PSTR(HELP_VEL_VEN_FUMI), PSTR(RANGE_300_2800_G));
 	MENU_ITEM_EDIT(int10, MSG_TST_VEN_RISC, &vel_vent_riscaldamento[powerMenuIndex], 0, 230, PSTR(HELP_TST_VEN_RISC), PSTR(RANGE_0_230_V));
 	MENU_ITEM_EDIT(float21, MSG_TEMP_COCLEA, &tempo_coclea[powerMenuIndex], _P27, 60, PSTR(MSG_TEMP_COCLEA), PSTR(RANGE_0_60_S));
+	MENU_ITEM_EDIT(int3, MSG_PWR_LOW, &termostatiSpegnimento[powerMenuIndex], 0, 850, PSTR(HELP_PWR_LOW), PSTR(RANGE_0_250_C));
 	END_MENU();
 }
 
@@ -321,6 +324,8 @@ static void lcd_termostat_menu() {
 	MENU_ITEM_EDIT(int3, MSG_MOD_FUMI, &_Th07, 0, 850, PSTR(HELP_MOD_FUMI), PSTR(RANGE_0_250_C));
 	MENU_ITEM_EDIT(int3, MSG_SIC_FUMI, &_Th08, 0, 850, PSTR(HELP_SIC_FUMI), PSTR(RANGE_0_250_C));
 	MENU_ITEM_EDIT(int3, MSG_BYP_ACC, &_Th09, 0, 850, PSTR(HELP_BYP_ACC), PSTR(RANGE_0_250_C));
+	
+
 	END_MENU();
 }
 
@@ -605,11 +610,9 @@ void lcd_setcontrast(uint8_t value)
 
 
 
-void lcd_buzz(long duration, uint16_t freq)
+void lcd_buzz()
 {
-#ifdef LCD_USE_I2C_BUZZER
-  lcd.buzz(duration,freq);
-#endif
+	lcd_implementation_quick_feedback();
 }
 
 bool lcd_clicked()

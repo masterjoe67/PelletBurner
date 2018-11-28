@@ -24,7 +24,7 @@
   #define LCD_TIMEOUT_TO_STATUS 15000
 
 
-  void lcd_buzz(long duration,uint16_t freq);
+  void lcd_buzz();
   bool lcd_clicked();
 
 char *itostr2(const uint8_t &x);

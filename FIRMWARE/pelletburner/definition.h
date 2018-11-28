@@ -168,6 +168,13 @@ extern unsigned int _Th07;
 extern unsigned int _Th08;
 extern unsigned int _Th09;
 
+/*extern unsigned int _Th35;
+extern unsigned int _Th36;
+extern unsigned int _Th37;
+extern unsigned int _Th38;
+extern unsigned int _Th39;
+extern unsigned int _Th40;*/
+
 extern unsigned int _Th43;
 
 extern unsigned int _T01;

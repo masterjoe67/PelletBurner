@@ -84,6 +84,7 @@
 	#define MSG_MOD_FUMI				"Mod. fumi"
 	#define MSG_SIC_FUMI				"Sic. fumi"
 	#define MSG_BYP_ACC					"Bypass acc."
+	#define MSG_PWR_LOW					"Bassa tem."
 //Messaggi estesi
 	#define HELP_VEL_VEN_FUMI			"Velocita ventola fumi"
 	#define HELP_PRE_CLEAN				"Puliz. in  accensione"
@@ -105,6 +106,9 @@
 	#define HELP_MOD_FUMI				"Modulazione fumi"
 	#define HELP_SIC_FUMI				"Sicurezza fumi"
 	#define HELP_BYP_ACC				"Bypass accensione"
+	#define HELP_PWR_LOW				"Spegnimento bassa    temperatura"
+
+
 //Messaggi di range
 	#define RANGE_0_900_S				"[0..900 sec.]"
 	#define RANGE_0_60_S				"[0..60 sec.]"

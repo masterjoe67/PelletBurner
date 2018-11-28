@@ -48,7 +48,12 @@ unsigned int _Th07;
 unsigned int _Th08;
 unsigned int _Th09;
 
-
+/*unsigned int _Th35;
+unsigned int _Th36;
+unsigned int _Th37;
+unsigned int _Th38;
+unsigned int _Th39;
+unsigned int _Th40;*/
 
 unsigned int _Th43;
 

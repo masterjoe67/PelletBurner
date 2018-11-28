@@ -85,23 +85,23 @@
 
 
 //Termostati
-#define Th01   700     //Termostato stufa spenta
-#define Th02   80      //Termostato disattivazione candeletta
-#define Th03   70      //Termostato prespegnimento mancanza fiamma
-#define Th05   650      //Termostato attivazione ventola riscaldamento
-#define Th06   650      //Termostato passaggio in stabilizzazione da variabile
-#define Th07   660      //Termostato modulazione fumi
-#define Th08   800      //Termostato sicurezza fumi
-#define Th09  100      //Termostato bypass accensione
+#define Th01	700     //Termostato stufa spenta
+#define Th02	80      //Termostato disattivazione candeletta
+#define Th03	70      //Termostato prespegnimento mancanza fiamma
+#define Th05	650      //Termostato attivazione ventola riscaldamento
+#define Th06	650      //Termostato passaggio in stabilizzazione da variabile
+#define Th07	660      //Termostato modulazione fumi
+#define Th08	800      //Termostato sicurezza fumi
+#define Th09	100      //Termostato bypass accensione
 
-#define Th35  100      //Termostato spegnimento potenza 1
-#define Th36  100      //Termostato spegnimento potenza 2
-#define Th37  100      //Termostato spegnimento potenza 3
-#define Th38  100      //Termostato spegnimento potenza 4
-#define Th39  100      //Termostato spegnimento potenza 5
-#define Th40  100      //Termostato spegnimento potenza 6
+#define Th35	100      //Termostato spegnimento potenza 1
+#define Th36	100      //Termostato spegnimento potenza 2
+#define Th37	100      //Termostato spegnimento potenza 3
+#define Th38	100      //Termostato spegnimento potenza 4
+#define Th39	100      //Termostato spegnimento potenza 5
+#define Th40	100      //Termostato spegnimento potenza 6
 
-#define Th43  100      //Termostato spegnimento modulazione
+#define Th43	100      //Termostato spegnimento modulazione
 
 //Timers 
 #define T01    2       //Pulizzia in accensione             0..900[sec]

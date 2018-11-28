@@ -328,6 +328,13 @@ void Config_ResetDefault()
     _Th08 = Th08;
     _Th09 = Th09;
 
+	/*_Th35 = Th35;
+	_Th36 = Th36;
+	_Th37 = Th37;
+	_Th38 = Th38;
+	_Th39 = Th39;
+	_Th40 = Th40;*/
+
     _Th43 = Th43;
     
     _T01 = T01;
