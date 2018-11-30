@@ -149,7 +149,7 @@ long ACPWM::getAuxOnTime(){return (long) auxOnTime;}
 long ACPWM::getAuxOffTime(){return (long) auxOffTime;}
 
 
-//Interrupt service routine of Timer1
+//Interrupt service routine of Timer3
 ISR(TIMER3_COMPA_vect){
 	if(ACpwm.getBasicLatch()==0){
 		digitalWrite(ACpwm.getPwmPin(),HIGH);
@@ -185,7 +185,7 @@ ISR(TIMER3_COMPA_vect){
 	TCNT3 = 1;  //Set counter to COMPARE_VALUE-onTime   
 }
 
-//Interrupt service routine of Timer1
+//Interrupt service routine of Timer4
 ISR(TIMER4_COMPA_vect){
 	if(ACpwm.getBasicLatch()==0){
 		digitalWrite(ACpwm.getPwmAuxPin(),HIGH);

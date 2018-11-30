@@ -1,38 +1,27 @@
+////////////////////////////////////////////////////////////////////////////////
+//                          ARDUINO PELLETS STOVE                             //                                       
+//                            by Giovanni Legati                              //
+//                               M.J.E.  2018                                 //
+////////////////////////////////////////////////////////////////////////////////
+
+
 #ifndef LANGUAGE_H
 #define LANGUAGE_H
 
-// NOTE: IF YOU CHANGE THIS FILE / MERGE THIS FILE WITH CHANGES
-//
-//   ==> ALWAYS TRY TO COMPILE MARLIN WITH/WITHOUT "ULTIPANEL" / "ULTRALCD" / "SDSUPPORT" #define IN "Configuration.h" 
-//   ==> ALSO TRY ALL AVAILABLE "LANGUAGE_CHOICE" OPTIONS
 
-// Languages
-// 1  English
-// 2  Polish
-// 3  French
-// 4  German
-// 5  Spanish
-// 6  Russian
-// 7  Italian
-// 8  Portuguese
-// 9  Finnish
 
 #ifndef LANGUAGE_CHOICE
-#define LANGUAGE_CHOICE 7  // Pick your language from the list above
+#define LANGUAGE_CHOICE 1  // Pick your language from the list above
 #endif
 
 #define PROTOCOL_VERSION "1.0"
 
 
-#define MACHINE_NAME "RE-CUT"
+#define MACHINE_NAME "PELLET_BURNER"
 
 
 #define FIRMWARE_URL "m"
 
-
-#ifndef MACHINE_UUID
-   #define MACHINE_UUID "00000000-0000-0000-0000-000000000000"
-#endif
 
 #define STRINGIFY_(n) #n
 #define STRINGIFY(n) STRINGIFY_(n)
@@ -40,11 +29,7 @@
 
 
 
-#if LANGUAGE_CHOICE == 7
-
-	//char* nomi_stati[] = { "Spento", "Check-up", "Accensione", "Stabilizzazione", "Recupero accensione", "Normale", "Modulazione", "Standby", "Sicurezza", "Spegnimento", "Blocco" };
-
-
+#if LANGUAGE_CHOICE == 1
 	// LCD Menu Messages
 	#define MSG_SERVICE					"Service"
 	#define MSG_TST_VEN_FUMI			"Ven. fumi"
@@ -53,6 +38,9 @@
 	#define MSG_TST_CANDELETTA			"Candeletta"
 	#define MSG_TIMERS                  "Timers"
 	#define MSG_TERMOSTAT               "Termostati"
+	#define MSG_DATETIME				"Ora e data"
+	#define MSG_HOUR					"Ore"
+	#define MSG_MINUTS					"Minuti"
 
 	#define MSG_PARAMETER               "Parametri"
 	#define MSG_POWERS                  "Livelli pot."
@@ -107,7 +95,7 @@
 	#define HELP_SIC_FUMI				"Sicurezza fumi"
 	#define HELP_BYP_ACC				"Bypass accensione"
 	#define HELP_PWR_LOW				"Spegnimento bassa    temperatura"
-
+	#define HELP_PWR_LOW_MOD			"Spegnimento bassa    temperatura modulazione"
 
 //Messaggi di range
 	#define RANGE_0_900_S				"[0..900 sec.]"

@@ -73,10 +73,10 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\pelletburner;$(ProjectDir)..\libraries\U8glib\src;$(ProjectDir)..\libraries\RTCLib_by_NeiroN;C:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\Wire\src;C:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\Wire\src\utility;C:\Program Files (x86)\Arduino\libraries;C:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries;$(ProjectDir)..\libraries;C:\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino;C:\Program Files (x86)\Arduino\hardware\arduino\avr\variants\mega;C:\Program Files (x86)\Arduino\hardware\tools\avr\avr\include;C:\Program Files (x86)\Arduino\hardware\tools\avr\avr\include\avr;C:\Program Files (x86)\Arduino\hardware\tools\avr\lib\gcc\avr\4.8.1\include;C:\Program Files (x86)\Arduino\hardware\tools\avr\lib\gcc\avr\4.9.2\include;C:\Program Files (x86)\Arduino\hardware\tools\avr\lib\gcc\avr\4.9.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\pelletburner;$(ProjectDir)..\libraries\RTClib;C:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\Wire\src;$(ProjectDir)..\libraries\U8glib\src;C:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\Wire\src\utility;C:\Program Files (x86)\Arduino\libraries;C:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries;$(ProjectDir)..\libraries;C:\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino;C:\Program Files (x86)\Arduino\hardware\arduino\avr\variants\mega;C:\Program Files (x86)\Arduino\hardware\tools\avr\avr\include;C:\Program Files (x86)\Arduino\hardware\tools\avr\avr\include\avr;C:\Program Files (x86)\Arduino\hardware\tools\avr\lib\gcc\avr\4.8.1\include;C:\Program Files (x86)\Arduino\hardware\tools\avr\lib\gcc\avr\4.9.2\include;C:\Program Files (x86)\Arduino\hardware\tools\avr\lib\gcc\avr\4.9.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ProjectDir)__vm\.pelletburner.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <WholeProgramOptimization>false</WholeProgramOptimization>
-      <PreprocessorDefinitions>__AVR_ATmega2560__;F_CPU=16000000L;ARDUINO=10807;ARDUINO_AVR_MEGA2560;ARDUINO_ARCH_AVR;__cplusplus=201103L;_VMICRO_INTELLISENSE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>__AVR_ATmega2560__;__AVR__;F_CPU=16000000L;ARDUINO=10807;ARDUINO_AVR_MEGA2560;ARDUINO_ARCH_AVR;__cplusplus=201103L;_VMICRO_INTELLISENSE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -126,7 +126,7 @@
     <ClInclude Include="dogm_font_data_anulu3d.h">
       <FileType>CppCode</FileType>
     </ClInclude>
-    <ClInclude Include="dogm_lcd_implementation.h" />
+    <ClInclude Include="lcd_implementation.h" />
     <ClInclude Include="fastio.h" />
     <ClInclude Include="language.h">
       <FileType>CppCode</FileType>
@@ -135,13 +135,7 @@
     <ClInclude Include="thermistor.h">
       <FileType>CppCode</FileType>
     </ClInclude>
-    <ClInclude Include="ultralcd.h" />
-    <ClInclude Include="ultralcd_implementation_hitachi_HD44780.h">
-      <FileType>CppCode</FileType>
-    </ClInclude>
-    <ClInclude Include="ultralcd_st7920_u8glib_rrd.h">
-      <FileType>CppCode</FileType>
-    </ClInclude>
+    <ClInclude Include="lcd_menu.h" />
     <ClInclude Include="__vm\.pelletburner.vsarduino.h" />
   </ItemGroup>
   <ItemGroup>
@@ -150,7 +144,7 @@
     <ClCompile Include="ConfigurationStore.cpp" />
     <ClCompile Include="definition.cpp" />
     <ClCompile Include="thermistor.cpp" />
-    <ClCompile Include="ultralcd.cpp" />
+    <ClCompile Include="lcd_menu.cpp" />
   </ItemGroup>
   <PropertyGroup>
     <DebuggerFlavor>VisualMicroDebugger</DebuggerFlavor>
@@ -160,7 +154,7 @@
   </ImportGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties arduino.upload.port="COM3" debug.view.DigitalPins="" />
+      <UserProperties arduino.upload.port="COM3" debug.view.DigitalPins="" VM_ADDITIONAL_PREPROC="__AVR__" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

@@ -13,6 +13,7 @@
 #ifndef _VSARDUINO_H_
 #define _VSARDUINO_H_
 #define __AVR_ATmega2560__
+#define __AVR__
 #define F_CPU 16000000L
 #define ARDUINO 10807
 #define ARDUINO_AVR_MEGA2560

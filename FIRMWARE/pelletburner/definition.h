@@ -3,10 +3,13 @@
 //                            by Giovanni Legati                              //
 //                               M.J.E.  2018                                 //
 ////////////////////////////////////////////////////////////////////////////////
+
+
 #ifndef DEFINITION_H
 #define DEFINITION_H
 
 #include "Arduino.h"
+#include <RTClib.h>
 
 #define FORCE_INLINE __attribute__((always_inline)) inline
 #define ULTRA_LCD
@@ -39,8 +42,8 @@ extern char lcd_status_message[LCD_WIDTH + 1];
 
 extern int feedmultiply;
 
-#define ON  true
-#define OFF false
+#define _ON  true
+#define _OFF false
 
 //Definizione degli stati
 #define spento          0
@@ -55,7 +58,7 @@ extern int feedmultiply;
 #define spegnimento     9
 #define blocco          10
 #define pulizzia        11
-#define service         99
+#define service         12
 
 //Definizione tempi coclea
 #define coclea_acc      0    
@@ -101,10 +104,9 @@ extern int feedmultiply;
 
 #define BTN_ST			41
 
-#define LCD_CLK_PIN		23
-#define LCD_DAT_PIN		17
-#define LCD_CS_PIN		16
-//#define LCD_A0_PIN    69
+#define LCD_CLK_PIN		52
+#define LCD_DAT_PIN		51
+#define LCD_CS_PIN		53 
 
 #define BEEPER			37
 
@@ -118,7 +120,10 @@ extern int feedmultiply;
 //Encoder ventola fumi
 #define PulsesPerRevolution 	1
 
-
+extern DateTime now;
+extern int ore;
+extern int minuti;
+extern int secondi;
 
 extern uint32_t encoderPosition;
 extern int8_t encoderDiff; /* encoderDiff is updated from interrupt context and added to encoderPosition every LCD update */

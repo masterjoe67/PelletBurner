@@ -1,16 +1,27 @@
+////////////////////////////////////////////////////////////////////////////////
+//                          ARDUINO PELLETS STOVE                             //                                       
+//                            by Giovanni Legati                              //
+//                               M.J.E.  2018                                 //
+////////////////////////////////////////////////////////////////////////////////
+
+
 #include "definition.h"
 
 uint16_t VelocitaVentolaFumiSetpoint, VelocitaVentolaFumiOutput;
 uint16_t vel_vent_riscaldamentoOutput;
 volatile uint8_t buttons;  //the last checked buttons in a bit array.
 
-char* nomi_stati[] = {"Spento", "Check-up", "Accensione", "Stabilizzazione", "Recupero accensione", "Normale", "Modulazione", "Standby", "Sicurezza", "Spegnimento", "Blocco", "Service"};
+char* nomi_stati[] = {"Spento", "Check-up", "Accensione", "Stabilizzazione", "Recupero accensione", "Normale", "Modulazione", "Standby", "Sicurezza", "Spegnimento", "Blocco", "Pulizzia", "Service"};
 
 uint16_t _NTC_NOM_RESISTANCE;
 uint16_t _NTC_BETA;        
 uint16_t _NTC_SERIES_RES;
 
 uint8_t _seconds;
+DateTime now;
+int ore;
+int minuti;
+int secondi;
 
 unsigned int potenzaSelezionata = 1;
 

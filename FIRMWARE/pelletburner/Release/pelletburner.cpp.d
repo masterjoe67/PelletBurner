@@ -15,9 +15,10 @@ C:\Users\Giovanni\AppData\Local\Temp\VMBuilds\pelletburner\mega_atmega2560\Relea
  C:\Users\Giovanni\AppData\Local\Temp\VMBuilds\pelletburner\mega_atmega2560\Release\fastio.h \
  C:\Users\Giovanni\AppData\Local\Temp\VMBuilds\pelletburner\mega_atmega2560\Release\definition.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h \
+ D:\PELLETS-BURNER\FIRMWARE\libraries\RTClib/RTClib.h \
  C:\Users\Giovanni\AppData\Local\Temp\VMBuilds\pelletburner\mega_atmega2560\Release\ConfigurationStore.h \
  C:\Users\Giovanni\AppData\Local\Temp\VMBuilds\pelletburner\mega_atmega2560\Release\Configuration.h \
  C:\Users\Giovanni\AppData\Local\Temp\VMBuilds\pelletburner\mega_atmega2560\Release\AnalogUtility.h \
  C:\Users\Giovanni\AppData\Local\Temp\VMBuilds\pelletburner\mega_atmega2560\Release\pelletburner.h \
- C:\Users\Giovanni\AppData\Local\Temp\VMBuilds\pelletburner\mega_atmega2560\Release\ultralcd.h \
+ C:\Users\Giovanni\AppData\Local\Temp\VMBuilds\pelletburner\mega_atmega2560\Release\lcd_menu.h \
  C:\Users\Giovanni\AppData\Local\Temp\VMBuilds\pelletburner\mega_atmega2560\Release\language.h

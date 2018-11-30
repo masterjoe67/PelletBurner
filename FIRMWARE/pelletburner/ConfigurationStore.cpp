@@ -1,6 +1,14 @@
+////////////////////////////////////////////////////////////////////////////////
+//                          ARDUINO PELLETS STOVE                             //                                       
+//                            by Giovanni Legati                              //
+//                               M.J.E.  2018                                 //
+////////////////////////////////////////////////////////////////////////////////
+
 
 #include "ConfigurationStore.h"
 #include "definition.h"
+
+#define EEPROM_OFFSET 100
 
 void _EEPROM_writeData(int &pos, uint8_t* value, uint8_t size)
 {
@@ -23,11 +31,6 @@ void _EEPROM_readData(int &pos, uint8_t* value, uint8_t size)
 }
 #define EEPROM_READ_VAR(pos, value) _EEPROM_readData(pos, (uint8_t*)&value, sizeof(value))
 //======================================================================================
-
-
-
-
-#define EEPROM_OFFSET 100
 
 
 // IMPORTANT:  Whenever there are changes made to the variables stored in EEPROM
