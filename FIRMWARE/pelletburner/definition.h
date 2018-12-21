@@ -104,6 +104,9 @@ extern int feedmultiply;
 
 #define BTN_ST			41
 
+#define MAX6675_CS		48
+
+#define LCD_A0_PIN		49
 #define LCD_CLK_PIN		52
 #define LCD_DAT_PIN		51
 #define LCD_CS_PIN		53 

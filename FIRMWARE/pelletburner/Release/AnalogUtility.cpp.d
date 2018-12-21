@@ -14,4 +14,6 @@ C:\Users\Giovanni\AppData\Local\Temp\VMBuilds\pelletburner\mega_atmega2560\Relea
  C:\Users\Giovanni\AppData\Local\Temp\VMBuilds\pelletburner\mega_atmega2560\Release\definition.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h \
  D:\PELLETS-BURNER\FIRMWARE\libraries\RTClib/RTClib.h \
- C:\Users\Giovanni\AppData\Local\Temp\VMBuilds\pelletburner\mega_atmega2560\Release\thermistor.h
+ C:\Users\Giovanni\AppData\Local\Temp\VMBuilds\pelletburner\mega_atmega2560\Release\thermistor.h \
+ D:\PELLETS-BURNER\FIRMWARE\libraries\MAX6675\src/max6675.h \
+ C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\libraries\SPI\src/SPI.h

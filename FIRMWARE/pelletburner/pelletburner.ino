@@ -268,9 +268,9 @@ void superslowloop(){
             TimPeriodoCocleaCount = _P05;
             if(cocleaFlag) startTimCoclea(cocleaTime);
     }
- 
+	TempAmbiente = LeggeTempAmbiente();
     TempFumi = LeggeTempFumi();
-    //TempAmbiente = LeggeTempAmbiente();
+	Serial.println("T=" + TempAmbiente);
 	
     gestioneModoFunzionamento();
 
@@ -300,7 +300,7 @@ void superslowloop(){
 
 //Loop 1 minuto
 void one_minute_loop(){
-	TempAmbiente = LeggeTempAmbiente();
+	//TempAmbiente = LeggeTempAmbiente();
 
 	now = rtc.now();
 

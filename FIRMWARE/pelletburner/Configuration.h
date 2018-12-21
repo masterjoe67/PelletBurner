@@ -30,9 +30,9 @@
 // This enables the serial port associated to the Bluetooth interface
 //#define BTENABLED              // Enable BT interface on AT90USB devices
 
-#define NTC_NOM_RESISTANCE 10000         // Nominal resistance at 25 ºC
-#define NTC_BETA           3950          // thermistor's beta coefficient
-#define NTC_SERIES_RES     10000         // Value of the series resistor
+#define NTC_NOM_RESISTANCE 10000        // Nominal resistance at 25 ºC
+#define NTC_BETA           3950         // thermistor's beta coefficient
+#define NTC_SERIES_RES     9770         // Value of the series resistor
 
 #define DEFAULT_USER_TEMP 40             //Setpoint temperatura ambiente
 
