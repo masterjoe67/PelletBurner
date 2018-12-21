@@ -1,0 +1,16 @@
+﻿"Symbol";"Value";"Unit";
+"REFERENCE";"M20-7822046";"";
+"TraceParts.PartVersion";"1.1.0";"";
+"SUPPLIER";"Harwin";"";
+"TraceParts.PartStatus";"Published";"";
+"RS_STOCK_NUMBER";"4881724";"";
+"TraceParts.PartLanguage";"en";"";
+"DESIGN";"36 way top entry socket,2.54mm pitch";"";
+"TraceParts.InstanceId";"10-01082012-0959562W3CXNYA1Q0F0U0I0EH72TCKF";"";
+"TraceParts.PartTitle";"36 way top entry socket,2.54mm pitch";"";
+"TRACEPARTS";"TRACEPARTS";"";
+"TIMESTAMP";"07/12/2012 14:55:09";"";
+"REVISION";"A";"";
+"TraceParts.PartNumber";"10-01082012-095956";"";
+"TraceParts.PartStatusId";"";"";
+"TraceParts.ClassPath";"RS_COMPONENTS:10-01082012-095956";"";

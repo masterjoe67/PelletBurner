@@ -1,0 +1,68 @@
+
+/*******************************************************************************
+* image
+* filename: D:/PELLETS-BURNER/FIRMWARE/Custom char/power3.xml
+* name: Image
+*
+* preset name: Monochrome
+* data block size: 8 bit(s), uint8_t
+* RLE compression enabled: no
+* conversion type: Monochrome, Edge 128
+* bits per pixel: 1
+*
+* preprocess:
+*  main scan direction: top_to_bottom
+*  line scan direction: forward
+*  inverse: yes
+*******************************************************************************/
+
+/*
+ typedef struct {
+     const uint8_t *data;
+     uint16_t width;
+     uint16_t height;
+     } tImage;
+*/
+#include <stdint.h>
+
+
+
+static const uint8_t image_data_Image[70] = {
+    0x3f, 0xc0, 
+    0x20, 0x40, 
+    0x20, 0x40, 
+    0x20, 0x40, 
+    0x20, 0x40, 
+    0x20, 0x40, 
+    0x10, 0x40, 
+    0x10, 0x40, 
+    0x10, 0x40, 
+    0x10, 0x40, 
+    0x10, 0x40, 
+    0x10, 0x40, 
+    0x08, 0x40, 
+    0x08, 0x40, 
+    0x08, 0x40, 
+    0x08, 0x40, 
+    0x08, 0x40, 
+    0x08, 0x40, 
+    0x07, 0xc0, 
+    0x07, 0xc0, 
+    0x07, 0xc0, 
+    0x07, 0xc0, 
+    0x07, 0xc0, 
+    0x07, 0xc0, 
+    0x03, 0xc0, 
+    0x03, 0xc0, 
+    0x03, 0xc0, 
+    0x03, 0xc0, 
+    0x03, 0xc0, 
+    0x03, 0xc0, 
+    0x01, 0xc0, 
+    0x01, 0xc0, 
+    0x01, 0xc0, 
+    0x01, 0xc0, 
+    0x01, 0xc0
+};
+const tImage Image = { image_data_Image, 10, 35};
+
